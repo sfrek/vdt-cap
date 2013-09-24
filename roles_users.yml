@@ -1,0 +1,13 @@
+---
+controller:
+  - nova
+  - keystone
+  - quantum
+network:
+  - quantum
+storage:
+  - cinder
+  - glance
+compute:
+  - nova
+  - quantum

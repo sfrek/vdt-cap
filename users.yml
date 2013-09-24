@@ -1,0 +1,33 @@
+---
+groups:
+  nova: 600
+  keystone: 610
+  quantum: 620
+  glance: 630
+  cinder: 640
+  libvirtd: 650
+  kvm: 660  
+users:
+  nova:
+    uid: 600
+    home: "/var/lib/nova"
+    shell: "/bin/sh"
+    gids:
+    - libvirtd
+    - kvm
+  keystone: 
+    uid: 610
+    home: "/var/lib/keystone"
+    shell: "/bin/false"
+  quantum:
+    uid: 620
+    home: "/var/lib/quantum"
+    shell: "/bin/false"
+  glance: 
+    uid: 630
+    home: "/var/lib/glance"
+    shell: "/bin/false"
+  cinder:
+    uid: 640
+    home: "/var/lib/cinder"
+    shell: "/bin/false"

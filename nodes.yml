@@ -1,0 +1,41 @@
+---
+nodes:
+  - ceph01pre
+  - ceph02pre
+  - ceph03pre
+  - compute01pre
+  - compute02pre
+  - networkpre
+  - controllerpre
+  - networkpro
+  - controllerpro
+  - compute01pro
+  - compute02pro
+roles:
+  - pre:
+    - ceph01pre
+    - ceph02pre
+    - ceph03pre
+    - compute01pre
+    - compute02pre
+    - networkpre
+    - controllerpre
+  - pro:
+    - controllerpro
+    - networkpro
+    - compute01pro
+    - compute02pro    
+  - controller:
+    - controllerpre
+    - controllerpro
+  - network:
+    - networkpre
+    - networkpro
+  - storage:
+    - controllerpro
+    - controllerpre
+  - compute:
+    - compute01pre
+    - compute02pre
+    - compute01pro
+    - compute02pro
