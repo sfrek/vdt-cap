@@ -179,10 +179,33 @@ namespace :openstack_deploy do
   end
   
   # temporal task to repair debootstrap
-  task :repair_install, roles => :pro do
+  task :repair_install, :roles => :pro do
     run "apt-get -y autoremove; apt-get -y install man language-pack-es"
     run "echo 'LANGUAGE=es_ES.UTF-8' >> /etc/default/locale; echo 'LC_ALL=es_ES.UTF-8' >> /etc/default/locale;export LANG=es_ES.UTF-8;export LC_ALL=es_ES.UTF-8;locale-gen es_ES.UTF-8"
   end
+
+  desc "syncronize date time with hora.rediris.es through ntpdate"
+  task :date_ntpdate, :roles => :pro do
+    run "sed -i.bak 's/NTPDATE_USE_NTP_CONF=yes/NTPDATE_USE_NTP_CONF=no/g' /etc/default/ntpdate"
+    run "sed -i.bak 's/ntp.ubuntu.com/hora.rediris.es/g' /etc/default/ntpdate"
+    run "ntpdate -vdb hora.rediris.es"
+    run "hwclock --systohc"
+  end
+  # stages:
+  # 1 - Install RabbitMQ
+  #   1.1 - Create admin user 'openstack'
+  #   1.2 - Remove guest user
+  #   1.3 - Install plugins
+  # 2 - Install MySQL
+  #   2.1 - Change bind address
+  #   2.2 - Change character_ser_server
+  #   3.2 - Create databases
+  # 3 - Install keystone
+  #   3.1 - Config database
+  #   3.2 - Create tenants, users, endpoints, etc ...
+  # 4 - Install glance
+  # 5 - Install cinder
+  # 6 - Install 
 end
 
 
