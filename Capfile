@@ -178,6 +178,11 @@ namespace :openstack_deploy do
     run "apt-get update;apt-get -y dist-upgrade"
   end
   
+  # temporal task to repair debootstrap
+  task :repair_install, roles => :pro do
+    run "apt-get -y autoremove; apt-get -y install man language-pack-es"
+    run "echo 'LANGUAGE=es_ES.UTF-8' >> /etc/default/locale; echo 'LC_ALL=es_ES.UTF-8' >> /etc/default/locale;export LANG=es_ES.UTF-8;export LC_ALL=es_ES.UTF-8;locale-gen es_ES.UTF-8"
+  end
 end
 
 
